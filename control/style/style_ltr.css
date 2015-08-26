@@ -387,7 +387,7 @@ border: 2px solid #FFB38A;
 color: #ff7327;	
 }
 label.error {
-	color:#CA0000;
+	color:#ef5350;
 	padding-left:25px;
 	background:url('images/error.png') left no-repeat;
 	background-position:7px;
@@ -494,25 +494,24 @@ hr {
 
 /* Login */
 #login_box {
-	border: 2px solid #dddddd;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	margin: 150px auto 0 auto;
-	width: 500px;
+	width: 380px;
 	color: #666;
+	background:#fff;
 }
 #login_header {
-	border-bottom: 1px solid #dddddd;
-	background: url('images/login_header.png') no-repeat left;
-	height: 45px;
+	background: url('images/header_large.png') no-repeat center;
+	background-size: 160px 160px;
+	height: 160px;
 }
 #login_msg {
-	border-bottom: 1px solid #dddddd;
-	background: url('images/error.png') no-repeat left;
-	background-position: 20px;
-	padding: 5px 45px;
-	color: #ca0000;
+	background: url('images/error.png') no-repeat;
+	background-position: 20px 4px;
+	padding: 5px 55px 15px;
+	color: #ef5350;
 }
 #login_content {
 	padding: 10px;
