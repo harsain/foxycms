@@ -1,0 +1,29 @@
+<script type="text/javascript" src="../includes/libs/codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" type="text/css" href="../includes/libs/codemirror/lib/codemirror.css" />
+<link rel="stylesheet" type="text/css" href="../includes/libs/codemirror/theme/default.css" />
+<script type="text/javascript" src="../includes/libs/codemirror/mode/xml/xml.js"></script>
+<script type="text/javascript" src="../includes/libs/codemirror/mode/css/css.js"></script>
+
+<div class="page_title">» {$lang->get_phrase('styles')} » {$lang->get_phrase('edit_css')} » {$style.style_name}</div>
+<form action="?show=styles&action=start_edit_css" method="post">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="20%">{$lang->get_phrase('css')}</td><td><textarea id="css" name="css">{$style.css}</textarea></td>
+</tr>
+<tr><td></td><td>
+<input type="submit" value="{$lang->get_phrase('edit')}" />
+<input type="hidden" name="id" value="{$style.id}" />
+</td></tr>
+</table>
+</form>
+<script>
+var editor = CodeMirror.fromTextArea(document.getElementById("css"), {
+  mode: "text/css",
+  lineNumbers: true,
+  onCursorActivity: function() {
+    editor.setLineClass(hlLine, null);
+    hlLine = editor.setLineClass(editor.getCursor().line, "activeline");
+  }
+});
+var hlLine = editor.setLineClass(0, "activeline");
+</script>

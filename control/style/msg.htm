@@ -1,0 +1,6 @@
+<div class="page_title">» {$lang->get_phrase('message')}</div>
+<div class="page_content">
+<div class="{if $type == 1}success{else}failure{/if}"></div>
+{$msg}
+</div>
+{if $redirect != ""}<meta http-equiv="refresh" content="2; url={$redirect}" />{/if}

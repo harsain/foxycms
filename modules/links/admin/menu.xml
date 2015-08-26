@@ -1,0 +1,10 @@
+<links>
+	<link>
+		<url>add_link</url>
+		<phrase>add_link</phrase>
+	</link>
+	<link>
+		<url>show_links</url>
+		<phrase>show_links</phrase>
+	</link>
+</links>

@@ -1,0 +1,19 @@
+<div class="page_title">» {$lang->get_phrase('modules')} » {$lang->get_phrase('create_module')}</div>
+<form action="?show=modules&action=start_create_module" method="post" class="validate">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tr><td width="20%">{$lang->get_phrase('name')}</td><td><input type="text" name="name" class="required" /></td></tr>
+<tr><td width="20%">{$lang->get_phrase('version')}</td><td><input type="text" name="version" value="0.1" class="required" /></td></tr>
+<tr><td width="20%">{$lang->get_phrase('variable')}</td><td><input type="text" name="var" class="required" value="" /></td></tr>
+<tr><td width="20%">{$lang->get_phrase('programmer_name')}</td><td><input type="text" name="programmer_name" value="" /></td></tr>
+<tr><td width="20%">{$lang->get_phrase('programmer_email')}</td><td><input type="text" name="programmer_email" value="" /></td></tr>
+<tr><td width="20%">{$lang->get_phrase('directory')}</td><td>
+<select name="directory">
+	{foreach from=$directories item=ex name='loop' }
+	<option value="{$ex->dir}">{$ex}</option>
+	{/foreach}
+</select>
+</td></tr>
+<tr><td></td><td><input type="submit" value="{$lang->get_phrase('create')}" /></td></tr>
+</table>
+
+</form>

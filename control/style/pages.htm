@@ -1,0 +1,44 @@
+<script>
+{if $ajax}
+
+$(function() {
+	$("#pages_more").click(function() {
+		$("#pages_more_area").fadeToggle(200);
+		$("#page_number").focus();
+	});
+	$('#page_number').keypress(function(e){
+	if(e.which == 13){
+		var to_load = '{$current_url_minuspage}&page='+$("#page_number").val();
+		$("#{$ajax_div}").html("<div class='loading'></div>").load(to_load);
+	}
+	});
+
+	$(".pages a[id!=pages_more]").click(function() {
+		var to_load = $(this).attr("href");
+		$("#{$ajax_div}").html("<div class='loading'></div>").load(to_load);
+		return false;
+	});
+
+});
+
+{else}
+
+$(function() {
+	$("#pages_more").click(function() {
+		$("#pages_more_area").fadeToggle(200);
+		$("#page_number").focus();
+	});
+	$('#page_number').keypress(function(e){
+	if(e.which == 13){
+		window.location = '{$current_url_minuspage}&page='+$("#page_number").val();
+	}
+	});
+
+});
+{/if}
+</script>
+
+<div class="pages">
+{if $current_page eq ''}{$current_page = 1}{/if}
+{section name=tp loop=$pages_array}<a href="{$current_url_minuspage}&page={$pages_array[tp]}" {if $pages_array[tp] eq $current_page}class="selected"{/if}>{$pages_array[tp]}</a>{/section}<a id="pages_more" href="javascript:void()">{$lang->get_phrase('go_to')} »</a><a style="display:none" id="pages_more_area"><input type="number" id="page_number" size="4" /></a>
+</div>

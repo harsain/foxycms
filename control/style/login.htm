@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{$lang->header('dir')}">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset={$lang->header('charset')}" />
+	<title>{$settings.site_title} - {$lang->get_phrase('control_panel')}</title>
+	<link rel="stylesheet" type="text/css" href="style/style_{$lang->header('dir')}.css" />
+	<script type="text/javascript" src="../includes/libs/jquery.js"></script>
+	<script src="../includes/libs/jquery.validate.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="style/login.js"></script>
+</head>
+
+<body>
+
+<div id="login_box">
+<div id="login_header"></div>
+{if isset($auth_failed) and $auth_failed}
+<div id="login_msg">
+{$lang->get_phrase('auth_failed')}
+</div>
+{/if}
+<div id="login_content">
+<form action="login.php" method="post">
+<input type="text" name="uname" value="{$lang->get_phrase('username')}" class="js_text" /><br /><br />
+<input type="password" name="passw" value="{$lang->get_phrase('password')}" class="js_text" /><br /><br />
+<input type="submit" value="{$lang->get_phrase('login')}" />
+</form>
+</div>
+</div>
+
+</body>
+
+</html>

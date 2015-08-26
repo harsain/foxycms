@@ -1,0 +1,31 @@
+<div id="multi_action" style="display:none">
+<div class="dws">{$lang->get_phrase('do_with_selected')}</div>
+<a class="button multi_delete" href="?show=styles&action=delete_styles_multi">{$lang->get_phrase('delete')}</a>
+</div>
+
+<div class="page_title">» {$lang->get_phrase('styles')}</div>
+<div class="page_buttons">
+<a class="button" href="?show=styles&action=add_style">{$lang->get_phrase('add_style')}</a>
+<a class="button" href="?show=styles&action=import_style">{$lang->get_phrase('import_style')}</a>
+<a class="button" href="?show=styles&action=add_template">{$lang->get_phrase('add_template')}</a>
+</div>
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr class="table_head">
+<td width="5%"></td><td width="50%">{$lang->get_phrase('name')}</td><td>{$lang->get_phrase('options')}</td>
+</tr>
+{section name=tp loop=$styles}
+<tr class="table_item">
+<td><input type="checkbox" id="tobeselected" value="{$styles[tp].id}" /></td><td>{$styles[tp].style_name}</td>
+<td>
+<a class="button" href="?show=styles&action=edit_css&id={$styles[tp].id}">{$lang->get_phrase('edit_css')}</a>
+<a class="button" href="?show=styles&action=show_templates&style_id={$styles[tp].id}">{$lang->get_phrase('show_templates')}</a>
+<a class="button" href="?show=styles&action=edit_style&id={$styles[tp].id}">{$lang->get_phrase('edit')}</a>
+<a class="button delete" href="?show=styles&action=delete_style&id={$styles[tp].id}">{$lang->get_phrase('delete')}</a>
+<a class="button" href="?show=styles&action=export_style&id={$styles[tp].id}">{$lang->get_phrase('export')}</a>
+</td>
+</tr>
+{/section}
+<tr><td colspan="3">
+{include file="style/pages.htm"}
+</td></tr>
+</table>

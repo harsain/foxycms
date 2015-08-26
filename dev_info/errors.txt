@@ -1,0 +1,20 @@
+ERROR 001:
+	in database(db) class, in mysql_connect
+ERROR 002:
+	in database(db) class, in mysql_select_db
+ERROR 003:
+	in database(db) class, in sqlite_open
+ERROR 004:
+	in database(db) class, in fetch , $db_connected = false
+EREOR 005:
+	in database(db) class, in fetch, in mysql_query
+ERROR 007:
+	in database(db) class, in fetch, in sqlite_query
+ERROR 008:
+	in database(db) class, in insert, in mysql_query
+ERROR 009:
+	in database(db) class, in insert, in sqlite_query
+ERROR 010:
+	in database(db) class, in update, in mysql_query
+ERROR 011:
+	in database(db) class, in update, in sqlite_query

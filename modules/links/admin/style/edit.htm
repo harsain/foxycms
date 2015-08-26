@@ -1,0 +1,41 @@
+<div class="page_title">» {$lang->get_phrase('links')} » {$lang->get_phrase('edit_link')} » {$link.title}</div>
+<form action="?show=module_links&action=start_edit_link" method="post" class="required">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>{$lang->get_phrase('title')}</td><td><input type="text" name="title" value="{$link.title}" class="required" /></td>
+</tr>
+<tr>
+<td width="25%">{$lang->get_phrase('url')}</td><td><input type="text" name="url" value="{$link.url}" class="required" /></td>
+</tr>
+<tr>
+<td width="25%">{$lang->get_phrase('menu')}</td><td>
+<select name="menu_id">
+	{section name=tp loop=$menus}
+	<option value="{$menus[tp].id}" {if $link.menu_id == $menus[tp].id}selected="selected"{/if}>{$menus[tp].title}</option>
+	{/section}
+</select>
+</td>
+</tr>
+<tr>
+<td width="25%">{$lang->get_phrase('target')}</td><td>
+<select name="target">
+	<option value="_self" {if $link.target == '_self'}selected="selected"{/if}>_self ({$lang->get_phrase('same_window')})</option>
+	<option value="_blank" {if $link.target == '_blank'}selected="selected"{/if}>_blank ({$lang->get_phrase('new_window')})</option>
+</select>
+</td>
+</tr>
+<tr>
+<td width="25%">{$lang->get_phrase('order')}</td><td><input type="text" name="order" value="{$link.order}" class="required" /></td>
+</tr>
+<tr>
+<td width="25%">{$lang->get_phrase('status')}</td><td>
+<input type="radio" name="status" value="1" {if $link.status == 1}checked="checked"{/if} />{$lang->get_phrase('enabled')}
+<input type="radio" name="status" value="0" {if $link.status == 0}checked="checked"{/if} />{$lang->get_phrase('disabled')}
+</td>
+</tr>
+<tr><td></td><td>
+<input type="submit" value="{$lang->get_phrase('edit')}" />
+<input type="hidden" name="id" value="{$link.id}" />
+</td></tr>
+</table>
+</form>

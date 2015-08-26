@@ -1,0 +1,40 @@
+<div class="page_title">» {$lang->get_phrase('users')} » {$lang->get_phrase('edit')} » {$user.username}</div>
+<form action="?show=users&action=start_edit_user&id={$user.id}" method="post" class="validate">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="20%">{$lang->get_phrase('username')}</td><td><input class="required" type="text" name="username" value="{$user.username}" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('password')}</td><td><input class="password" type="text" name="password" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('email')}</td><td><input class="required email" type="text" name="email" value="{$user.email}" /></td>
+</tr>
+{section name=tp loop=$fields}
+<tr>
+<td>({$fields[tp].field_name}) {$lang->get_phrase($fields[tp].phrase)}</td><td>
+{assign var=this_val value=$fields[tp].field_name}
+{if $fields[tp].field_type == 'text'}<input type="text" name="{$fields[tp].name}" value="{$user.$this_val}" />
+{elseif $fields[tp].field_type == 'select'}
+<select name="{$fields[tp].field_name}">
+{assign var=values value=","|explode:$fields[tp].field_value} 
+{foreach from=$values item=option}
+<option value="{$option}">{$option}</option>
+{/foreach}
+</select>
+{/if}
+</td>
+</tr>
+{/section}
+<tr>
+<td>{$lang->get_phrase('user_group')}</td><td>
+<select name="user_group" class="required">
+{section name=tp loop=$users_groups}
+<option value="{$users_groups[tp].id}" {if $users_groups[tp].id eq $user.user_group}SELECTED{/if}>{$users_groups[tp].name}</option>
+{/section}
+</select>
+</td>
+</tr>
+<tr><td></td><td><input type="submit" value="{$lang->get_phrase('edit')}" /></td></tr>
+</table>
+</form>

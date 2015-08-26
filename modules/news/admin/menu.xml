@@ -1,0 +1,22 @@
+<links>
+	<link>
+		<url>show_news</url>
+		<phrase>show_news</phrase>
+	</link>
+	<link>
+		<url>add_news</url>
+		<phrase>add_news</phrase>
+	</link>
+	<link>
+		<url>show_categories</url>
+		<phrase>show_categories</phrase>
+	</link>
+	<link>
+		<url>add_category</url>
+		<phrase>add_category</phrase>
+	</link>
+	<link>
+		<url>settings</url>
+		<phrase>settings</phrase>
+	</link>
+</links>

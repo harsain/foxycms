@@ -1,0 +1,36 @@
+<script>
+$(function() {
+	$("select#type").change(function() {
+		if($(this).val() == 'select') {
+			$("tr#select").fadeIn("fast");
+		} else {
+			$("tr#select").fadeOut("fast");
+		}
+	});
+	{if $field.field_type eq 'select'}
+		$("tr#select").fadeIn("fast");
+	{/if}
+});
+</script>
+<div class="page_title">» {$lang->get_phrase('users')} » {$lang->get_phrase('edit')} » {$field.field_name}</div>
+<form action="?show=users&action=start_edit_field" method="post" class="validate">
+<input type="hidden" name="id" value="{$field.id}" />
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="20%">{$lang->get_phrase('name')}</td><td><input type="text" name="name" value="{$field.field_name}" class="required" /></td>
+</tr>
+<tr><td width="20%">{$lang->get_phrase('phrase_name')}</td><td><input type="text" name="phrase" value="{$field.phrase}" /></td></tr>
+<tr>
+<td>{$lang->get_phrase('type')}</td><td>
+<select name="type" id="type" class="required">
+	<option value="text">{$lang->get_phrase('text')}</option>
+	<option value="select" {if $field.field_type eq 'select'}SELECTED{/if}>{$lang->get_phrase('select_menu')}</option>
+</select>
+</td>
+</tr>
+<tr style="display:none" id="select"><td>{$lang->get_phrase('value')} ({$lang->get_phrase('select_menu')})</td><td><textarea name="value">{$field.field_value}</textarea>
+<br />{$lang->get_phrase('separate_values_comma')}
+</td></tr>
+<tr><td></td><td><input type="submit" value="{$lang->get_phrase('edit')}" /></td></tr>
+</table>
+</form>

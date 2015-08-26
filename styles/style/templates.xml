@@ -1,0 +1,46 @@
+<language>
+<details>
+    <name></name>
+    <code></code>
+</details>
+<template>
+    <template>block</template>
+    <source>PGRpdiBjbGFzcz0iYmxvY2tfYm94Ij4NCiAgPCEtLXRpdGxlX3N0YXJ0LS0+PGRpdiBjbGFzcz0iYmxvY2tfdGl0bGUiPiN0aXRsZSM8L2Rpdj48IS0tdGl0bGVfZW5kLS0+DQogIDxkaXYgY2xhc3M9ImJsb2NrX2NvbnRlbnQiPg0KICAgICNjb250ZW50Iw0KICA8L2Rpdj4NCjwvZGl2Pg==</source>
+    <owner>AWCM</owner>
+</template>
+<template>
+    <template>dd</template>
+    <source></source>
+    <owner>AWCM</owner>
+</template>
+<template>
+    <template>rr</template>
+    <source>cnJycnJyciAiIiA+PFIg</source>
+    <owner>AWCM</owner>
+</template>
+<template>
+    <template>test2</template>
+    <source></source>
+    <owner>AWCM</owner>
+</template>
+<template>
+    <template>news_section</template>
+    <source>PGgxPk5ld3M8L2gxPg0KDQo8cD5oZWxsbywgeW91IGFyZSBpbiBuZXdzIHNlY3Rpb248L3A+</source>
+    <owner>AWCM</owner>
+</template>
+<template>
+    <template>test</template>
+    <source>PGRpdiBzdHlsZT0iYmFja2dyb3VuZDpibGFjayI+aGVsbG88L2Rpdj4=</source>
+    <owner>AWCM</owner>
+</template>
+<template>
+    <template>header</template>
+    <source>PGRpdiBpZD0iY29udGFpbmVyIj4NCiAgPGRpdiBpZD0iaGVhZGVyIj4NCiAgeyRzZXR0aW5ncy5zaXRlX3RpdGxlfQ0KICA8L2Rpdj4NCiAgPGRpdiBpZD0iY29udGVudCI+DQogICAgPGRpdiBzdHlsZT0iZmxvYXQ6bGVmdDt3aWR0aDoxOTBweDsiPg0KICAgIHskYmxvY2tzLT5nZXRfYmxvY2tzKDQpfQ0KICAgIDwvZGl2Pg==</source>
+    <owner>AWCM</owner>
+</template>
+<template>
+    <template>footer</template>
+    <source>PGRpdiBzdHlsZT0iZmxvYXQ6cmlnaHQ7d2lkdGg6MTkwcHg7Ij4NCiAgICAJCXskYmxvY2tzLT5nZXRfYmxvY2tzKDMpfQ0KICAgIAkJPC9kaXY+DQoJPGRpdiBzdHlsZT0iY2xlYXI6Ym90aDsiPjwvZGl2Pg0KCTwvZGl2Pg0KCTxkaXYgaWQ9ImZvb3RlciI+U3R5bGsubmV0PC9kaXY+DQo8L2Rpdj4=</source>
+    <owner>AWCM</owner>
+</template>
+</language>

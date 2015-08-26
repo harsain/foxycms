@@ -1,0 +1,31 @@
+<div class="page_title">» {$lang->get_phrase('categories')} » {$lang->get_phrase('edit_category')} » {$cat.title}</div>
+<form action="?show=module_news&action=start_edit_category" method="post" class="validate">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>{$lang->get_phrase('title')}</td><td><input type="text" name="title" value="{$cat.title}" class="required" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('description')}</td><td><textarea name="description">{$cat.description}</textarea></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('parent_category')}</td><td>
+<select name="parent_id">
+	<option value="0">{$lang->get_phrase('none')}</option>
+	{section name=tp loop=$cats}
+	<option value="{$cats[tp].id}" {if $cat.parent_id == $cats[tp].id}selected="selected"{/if}>{$cats[tp].title}</option>
+	{/section}
+</select>
+</td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('order')}</td><td><input type="text" name="order" value="{$cat.order}" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('status')}</td><td>
+<input type="radio" name="status" value="1" {if $cat.status == 1}checked="checked"{/if} />{$lang->get_phrase('enabled')}
+<input type="radio" name="status" value="0" {if $cat.status == 0}checked="checked"{/if} />{$lang->get_phrase('disabled')}
+</td>
+</tr>
+<tr><td></td><td><input type="submit" value="{$lang->get_phrase('add')}" /></td></tr>
+</table>
+</form>

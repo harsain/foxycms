@@ -1,0 +1,24 @@
+<div class="page_title">» {$lang->get_phrase('styles')} » {$lang->get_phrase('edit_style')} » {$style.style_name}</div>
+<form action="?show=styles&action=start_edit_style" method="post" class="required">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>{$lang->get_phrase('code')}</td><td><input type="text" name="code" value="{$style.style_code}" class="required" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('name')}</td><td><input type="text" name="name" value="{$style.style_name}" class="required" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('status')}</td><td>
+<input type="radio" name="status" value="1" {if $style.status == 1}checked="checked"{/if} />{$lang->get_phrase('enabled')}
+<input type="radio" name="status" value="0" {if $style.status == 0}checked="checked"{/if} />{$lang->get_phrase('disabled')}
+</td>
+</tr>
+<tr><td>{$lang->get_phrase('version')}</td><td><input type="text" name="version" value="{$style.version}" class="required" /></td></tr>
+<tr><td>{$lang->get_phrase('designer_name')}</td><td><input type="text" name="designer_name" value="{$style.designer_name}" /></td></tr>
+<tr><td>{$lang->get_phrase('designer_email')}</td><td><input type="text" name="designer_email"value="{$style.designer_email}" /></td></tr>
+<tr><td></td><td>
+<input type="submit" value="{$lang->get_phrase('edit')}" />
+<input type="hidden" name="id" value="{$style.id}" />
+</td></tr>
+</table>
+</form>

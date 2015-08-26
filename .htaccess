@@ -1,0 +1,7 @@
+RewriteEngine on
+
+RewriteRule ^m/(.*)/$ index.php?mod=$1
+RewriteRule ^m/(.*)$ index.php?mod=$1
+
+RewriteRule ^m/(.*)/(.*)$ index.php?mod=$1
+

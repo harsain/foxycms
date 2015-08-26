@@ -1,0 +1,39 @@
+<div class="page_title">» {$lang->get_phrase('languages')} » {$lang->get_phrase('edit_phrases')}</div>
+<form action="?show=languages&action=start_edit_phrases" method="post" class="validate">
+<table cellpadding="0" cellspacing="0" width="100%">
+{foreach from=$phrases_list item=current_phrase}
+<input type="hidden" name="id[]" value="{$current_phrase.id}" />
+<tr>
+<td width="20%">{$lang->get_phrase('variable')}</td><td><input class="required" type="text" name="var[]" value="{$current_phrase.var}" readonly="readonly" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('language')}</td><td>
+<select name="lang_id[]" class="required">
+{section name=tp loop=$languages}
+<option value="{$languages[tp].id}" {if $languages[tp].id == $current_phrase.lang_id}selected="selected"{/if}>{$languages[tp].lang_name}</option>
+{/section}
+</select>
+</td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('text')}</td><td><textarea class="required" name="text[]">{$current_phrase.text}</textarea></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('module_plugin')}</td><td>
+<select name="owner[]" class="required">
+<option value="Foxy">Foxy</option>
+{section name=tp loop=$modules}
+<option value="{$modules[tp].var}" {if $modules[tp].var == $current_phrase.owner}selected="selected"{/if}>{$modules[tp].var}</option>
+{/section}
+</select>
+</td>
+</tr>
+<tr><td colspan="2"><hr /></td></tr>
+{/foreach}
+<tfoot>
+<tr><td></td><td>
+<input type="submit" value="{$lang->get_phrase('edit')}" />
+</td></tr>
+</tfoot>
+</table>
+</form>

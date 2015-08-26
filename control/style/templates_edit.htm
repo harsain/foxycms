@@ -1,0 +1,51 @@
+<script type="text/javascript" src="../includes/libs/codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" type="text/css" href="../includes/libs/codemirror/lib/codemirror.css" />
+<link rel="stylesheet" type="text/css" href="../includes/libs/codemirror/theme/default.css" />
+<script type="text/javascript" src="../includes/libs/codemirror/mode/xml/xml.js"></script>
+<script type="text/javascript" src="../includes/libs/codemirror/mode/css/css.js"></script>
+
+<div class="page_title">» {$lang->get_phrase('styles')} » {$lang->get_phrase('edit_template')} » {$template.template}</div>
+<form action="?show=styles&action=start_edit_template" method="post" class="valudate">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="20%">{$lang->get_phrase('template')}</td><td>{$template.template}</td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('style')}</td><td>
+<select name="style_id" class="required">
+{section name=tp loop=$styles}
+<option value="{$styles[tp].id}" {if $styles[tp].id == $template.style_id}selected="selected"{/if}>{$styles[tp].style_name}</option>
+{/section}
+</select>
+</td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('source')}</td><td><textarea class="required" id="source" name="source">{$template.source}</textarea></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('module_plugin')}</td><td>
+<select name="owner" class="required">
+<option value="Foxy">Foxy</option>
+{section name=tp loop=$modules}
+<option value="{$modules[tp].var}" {if $modules[tp].var == $template.owner}selected="selected"{/if}>{$modules[tp].var}</option>
+{/section}
+</select>
+</td>
+</tr>
+<tr><td></td><td>
+<input type="submit" value="{$lang->get_phrase('edit')}" />
+<input type="hidden" name="id" value="{$template.id}" />
+</td></tr>
+</table>
+</form>
+<script>
+var editor = CodeMirror.fromTextArea(document.getElementById("source"), {
+  mode: "text/html",
+  lineNumbers: true,
+  onCursorActivity: function() {
+    editor.setLineClass(hlLine, null);
+    hlLine = editor.setLineClass(editor.getCursor().line, "activeline");
+  }
+});
+var hlLine = editor.setLineClass(0, "activeline");
+</script>

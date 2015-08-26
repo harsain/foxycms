@@ -1,0 +1,254 @@
+<charsets>
+<charset>
+	<language>Arabic</language>
+	<code>iso-8859-6</code>
+</charset>
+<charset>
+	<language>Arabic</language>
+	<code>asmo-708</code>
+</charset>
+<charset>
+	<language>Arabic</language>
+	<code>x-mac-arabic</code>
+</charset>
+<charset>
+	<language>Arabic</language>
+	<code>windows-1256</code>
+</charset>
+<charset>
+	<language>Baltic</language>
+	<code>iso-8859-4</code>
+</charset>
+<charset>
+	<language>Baltic</language>
+	<code>windows-1257</code>
+</charset>
+<charset>
+	<language>Central European</language>
+	<code>iso-8859-2</code>
+</charset>
+<charset>
+	<language>Central European</language>
+	<code>latin2</code>
+</charset>
+<charset>
+	<language>Central European</language>
+	<code>x-mac-ce</code>
+</charset>
+<charset>
+	<language>Central European</language>
+	<code>windows-1250</code>
+</charset>
+<charset>
+	<language>Chinese Simplified</language>
+	<code>euc-cn</code>
+</charset>
+<charset>
+	<language>Chinese Simplified</language>
+	<code>gb2312</code>
+</charset>
+<charset>
+	<language>Chinese Simplified</language>
+	<code>hz-gb-2312</code>
+</charset>
+<charset>
+	<language>Chinese Simplified</language>
+	<code>x-mac-chinesesimp</code>
+</charset>
+<charset>
+	<language>Chinese Simplified</language>
+	<code>cp-936</code>
+</charset>
+<charset>
+	<language>Chinese Traditional</language>
+	<code>big5</code>
+</charset>
+<charset>
+	<language>Chinese Traditional</language>
+	<code>x-mac-chinesetrad</code>
+</charset>
+<charset>
+	<language>Chinese Traditional</language>
+	<code>cp-950</code>
+</charset>
+<charset>
+	<language>Chinese Traditional</language>
+	<code>cp-932</code>
+</charset>
+<charset>
+	<language>Chinese Traditional</language>
+	<code>euc-tw</code>
+</charset>
+<charset>
+	<language>Cyrillic</language>
+	<code>iso-8859-5</code>
+</charset>
+<charset>
+	<language>Cyrillic</language>
+	<code>koi8-r</code>
+</charset>
+<charset>
+	<language>Cyrillic</language>
+	<code>koi8</code>
+</charset>
+<charset>
+	<language>Cyrillic</language>
+	<code>x-mac-cyrillic</code>
+</charset>
+<charset>
+	<language>Cyrillic</language>
+	<code>windows-1251</code>
+</charset>
+<charset>
+	<language>Greek</language>
+	<code>iso-8859-7</code>
+</charset>
+<charset>
+	<language>Greek</language>
+	<code>x-mac-greek</code>
+</charset>
+<charset>
+	<language>Greek</language>
+	<code>windows-1253</code>
+</charset>
+<charset>
+	<language>Hebrew</language>
+	<code>iso-8859-8</code>
+</charset>
+<charset>
+	<language>Hebrew</language>
+	<code>iso-8859-8-i</code>
+</charset>
+<charset>
+	<language>Hebrew</language>
+	<code>x-mac-hebrew</code>
+</charset>
+<charset>
+	<language>Hebrew</language>
+	<code>windows-1255</code>
+</charset>
+<charset>
+	<language>Icelandic</language>
+	<code>x-mac-icelandic</code>
+</charset>
+<charset>
+	<language>Japanese</language>
+	<code>euc-jp</code>
+</charset>
+<charset>
+	<language>Japanese</language>
+	<code>iso-2022-jp</code>
+</charset>
+<charset>
+	<language>Japanese</language>
+	<code>x-mac-japanese</code>
+</charset>
+<charset>
+	<language>Japanese</language>
+	<code>shift_jis</code>
+</charset>
+<charset>
+	<language>Korean</language>
+	<code>ks_c_5601-1987</code>
+</charset>
+<charset>
+	<language>Korean</language>
+	<code>ksc5601</code>
+</charset>
+<charset>
+	<language>Korean</language>
+	<code>euc-kr</code>
+</charset>
+<charset>
+	<language>Korean</language>
+	<code>iso-2022-kr</code>
+</charset>
+<charset>
+	<language>Korean</language>
+	<code>x-mac-korean</code>
+</charset>
+<charset>
+	<language>Latin 9</language>
+	<code>iso-8859-15</code>
+</charset>
+<charset>
+	<language>Latin 9</language>
+	<code>latin9</code>
+</charset>
+<charset>
+	<language>Maltese</language>
+	<code>iso-8859-3</code>
+</charset>
+<charset>
+	<language>Maltese</language>
+	<code>latin3</code>
+</charset>
+<charset>
+	<language>Thai</language>
+	<code>windows-874</code>
+</charset>
+<charset>
+	<language>Thai</language>
+	<code>tis-620</code>
+</charset>
+<charset>
+	<language>Turkish</language>
+	<code>iso-8859-9</code>
+</charset>
+<charset>
+	<language>Turkish</language>
+	<code>latin5</code>
+</charset>
+<charset>
+	<language>Turkish</language>
+	<code>x-mac-turkish</code>
+</charset>
+<charset>
+	<language>Turkish</language>
+	<code>windows-1254</code>
+</charset>
+<charset>
+	<language>Unicode</language>
+	<code>utf-7</code>
+</charset>
+<charset>
+	<language>Unicode</language>
+	<code>utf-8</code>
+</charset>
+<charset>
+	<language>Unicode</language>
+	<code>iso-10646-ucs-2</code>
+</charset>
+<charset>
+	<language>Unicode</language>
+	<code>us-ascii</code>
+</charset>
+<charset>
+	<language>Vietnamese</language>
+	<code>windows-1258</code>
+</charset>
+<charset>
+	<language>Western European</language>
+	<code>iso-8859-1</code>
+</charset>
+<charset>
+	<language>Western European</language>
+	<code>latin1</code>
+</charset>
+<charset>
+	<language>Western European</language>
+	<code>x-mac-roman</code>
+</charset>
+<charset>
+	<language>Western European</language>
+	<code>macintosh</code>
+</charset>
+<charset>
+	<language>Western European</language>
+	<code>windows-1252</code>
+</charset>
+<charset>
+	<language>Other</language>
+	<code>isiri-3342</code>
+</charset>
+</charsets>

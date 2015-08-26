@@ -1,0 +1,252 @@
+<script>
+$(function() {
+
+	//Delete Confirmation
+	$("a.button.delete").click(function() {
+		var delete_link = $(this).attr("href");
+		var dialog_buttons = {};
+		var this_ele = $(this);
+		dialog_buttons[delete_phrase] = function(){
+			if($.get(delete_link+'&ajax')) {
+				this_ele.parent().parent().addClass("deleted").fadeOut("fast");
+				$(this).dialog( "close" );
+			}
+		}
+		dialog_buttons[cancel_phrase] = function(){ $(this).dialog( "close" ); }
+		$("#delete-confirm" ).dialog({ buttons: dialog_buttons, show: "drop",hide: "drop",modal: true });
+		return false;
+	});
+	
+	// multi delete
+	$("a.multi_delete").click(function() {
+		var dialog_buttons = {};
+		var this_ele = $(this);
+		dialog_buttons[delete_phrase] = function() {
+			window.final_values = '';
+			$("input:checkbox[id=tobeselected]:checked").each(function() {
+				window.final_values = window.final_values+'|'+$(this).attr("value");
+				$(this).parent().parent().removeClass("selected").addClass("deleted").fadeOut();
+			});
+			$.get(this_ele.attr("href")+"&ids="+window.final_values);
+			$("#multi_action").hide("fast");
+			$(this).dialog( "close" );
+		}
+		dialog_buttons[cancel_phrase] = function(){ $(this).dialog( "close" ); }
+		$("#delete-confirm" ).dialog({ buttons: dialog_buttons, show: "drop",hide: "drop",modal: true  });
+		return false;
+	});
+	
+	$(".create_dir").click(function() {
+		var delete_link = $(this).attr("href");
+		var dialog_buttons = {};
+		var this_ele = $(this);
+		
+		dialog_buttons['{$lang->get_phrase('create')}'] = function(){
+			var dir_name = $("#dir_name").val();
+			$("#dir_name").attr("value","");
+
+			{literal}
+			$.post('jq_actions.php?action=medialib_create_dir', {'name': dir_name}, function(data) {
+				var dir_id = data;
+				$("#folders").append('<a class="dir" onClick="open_dir('+dir_id+',this)">'+dir_name+'</a>');
+			});
+			{/literal}
+			
+			$(this).dialog( "close" );
+		}
+		dialog_buttons[cancel_phrase] = function(){ $(this).dialog( "close" ); }
+		$("#create_dir_div" ).dialog({ buttons: dialog_buttons, show: "drop",hide: "drop",modal: true });
+		return false;
+		
+	});
+
+	// Upload Operation
+	$("button#upload").click(function() {
+		var delete_link = $(this).attr("href");
+		var dialog_buttons = {};
+		var this_ele = $(this);
+		
+
+		dialog_buttons[cancel_phrase] = function(){ $(this).dialog( "close" ); }
+		$("#upload_div" ).dialog({ buttons: dialog_buttons, show: "drop",hide: "drop",modal: true });
+		return false;
+	});
+	$("button#upload_file").click(function()  {
+		$("#upload[type=file]").trigger("click");
+	});
+	
+	$('input#upload[type=file]').change(function() {
+		$("#loading_upload").dialog();
+		var file_name = $('input#upload[type=file]').val();
+		var upload_div_html = '<img src="style/images/horizontal_loading.png" /><br />{$lang->get_phrase('uploading')}'+file_name;
+		$("#loading_upload").html(upload_div_html);
+		$("form#upload_form").submit();
+		
+	});
+	$(".button.move").click(function() {
+		$("#move_div").dialog();
+	});
+
+	$("#do_move").click(function() {
+		window.final_values = '';
+		var new_dir = $("select#move_dir").val();
+		$("input:checkbox[id=tobeselected]:checked").each(function() {
+			window.final_values = window.final_values+'|'+$(this).attr("value");
+			$(this).parent().parent().removeClass("selected").addClass("deleted").fadeOut();
+		});
+		$.get($("#do_move").attr("href")+"&new_dir="+new_dir+"&ids="+window.final_values);
+		$("#multi_action").hide("fast");
+		$("#move_div").dialog('close');
+	});
+
+	
+	
+
+});
+function open_dir(dir_id,el) {
+	$("#folders a").removeClass("current");
+	$(el).addClass("current");
+	$("input#dir").attr("value",dir_id);
+	$("#files_list").stop().html("<div class='loading'></div>").load("jq_actions.php?action=medialib_showfiles&dir="+dir_id);
+	
+	return false;
+}
+
+function upload_loaded() {
+	var file_name = $('input#upload[type=file]').val();
+	if(file_name != "") {
+		$("#loading_upload").html($("#upload_iframe").contents().find("body"));
+	}
+}
+
+//CheckBoxes
+function file_mouseover(file_id) {
+	$("#file_"+file_id).find("input[type=checkbox]").show();
+	$("#file_"+file_id).find("button").show();
+}
+function file_mouseout(file_id) {
+	var my_checkbox = $("#file_"+file_id).find("input[type=checkbox]");
+	var my_select = $("#file_"+file_id).find("button");
+	my_select.hide();
+	if(my_checkbox.is(":checked")) {
+		my_checkbox.addClass("selected");
+	} else {
+		my_checkbox.removeClass("selected");
+		my_checkbox.hide();
+	}
+}
+
+function checkbox_clicked(file_id) {
+	var my_checkbox = $("#file_"+file_id).find("input");
+	if(my_checkbox.is(":checked")) {
+		my_checkbox.parent().addClass("selected");
+	} else {
+		my_checkbox.parent().removeClass("selected");
+	}
+	{literal}
+	if($("#media_library .file.selected").length > 0) {
+		$("#multi_action").stop().slideDown(150).animate({backgroundColor: '#FFABAB'},200).animate({backgroundColor: 'white'},200);
+	} else {
+		$("#multi_action").slideUp(150);
+	}
+	{/literal}
+}
+
+function choose_photo(file_id,thumb_url) {
+	$("input.images_library").css("background","url("+thumb_url+")")
+	.attr("value",file_id);
+	$(document).trigger('close.facebox');
+}
+
+if($("#files_list").html() == "") {
+	open_dir('root',$("#root_link"));
+}
+
+</script>
+
+<!-- to be used for jquery ui dialog box --><div id="dialog_div" style="display:none"></div>
+
+<div id="multi_action" style="display:none">
+<div class="dws">{$lang->get_phrase('do_with_selected')}</div>
+<a class="button multi_delete" href="?show=media_library&action=delete_files_multi">{$lang->get_phrase('delete')}</a>
+<a class="button move" href="javascript:void();">{$lang->get_phrase('move_to_folder')}</a>
+</div>
+
+<!-- create dir div -->
+<div id="create_dir_div" style="display:none" title="{$lang->get_phrase('create_directory')}">
+<input type="text" id="dir_name" style="width:250px" />
+</div>
+<!-- /create dir div -->
+
+<!--  upload div -->
+<div id="upload_div" style="display:none" title="{$lang->get_phrase('upload')}">
+<button id="upload_file">{$lang->get_phrase('upload_from_computer')}</button>
+<button onclick='$("div#upload_url").fadeToggle();'>{$lang->get_phrase('upload_from_url')}</button>
+<br /><br />
+<div id="upload_url" style="display:none">
+<input type="text" id="url_to_upload" style="width:100%" />
+<button id="upload_url_do">{$lang->get_phrase('upload')}</button>
+</div>
+</div>
+<!--  /upload div -->
+
+<!-- upload operation -->
+<form id="upload_form" method="post" target="upload_iframe" action="jq_actions.php?action=medialib_do_upload" style="display:none" enctype="multipart/form-data">
+<input type="hidden" name="dir" id="dir" value="root" />
+<input type="file" id="upload" name="file_to_upload" />
+</form>
+<iframe style="display:none" id="upload_iframe" name="upload_iframe" onload="upload_loaded();"></iframe>
+<!-- /upload operation -->
+	
+<div id="move_div" style="display:none" title="{$lang->get_phrase('move_to_folder')}">
+{$lang->get_phrase('to')}: 
+<select style="width:200px;" id="move_dir">
+<option value="root">{$lang->get_phrase('root_directory')}</option>
+{foreach from=$dirs_array item=dir}
+<option value="{$dir.id}">{$dir.name}</option>
+{/foreach}
+</select><br /><br />
+<a href="?show=media_library&action=move_files_multi" onclick="return false;" class="button" id="do_move">{$lang->get_phrase('move_to_folder')}</a>
+</div>
+
+<div id="loading_upload" style="display:none;text-align:center" title="{$lang->get_phrase('uploading')}">
+
+</div>
+
+<div id="media_library">
+
+<div id="content">
+<table width="100%" style="margin:0">
+<tr>
+
+<td valign="top" id="folder_container">
+<div id="folders">
+
+<a class="create_dir">{$lang->get_phrase('create_directory')}</a>
+
+<a onClick="open_dir('root',this);" class="dir" id="root_link">{$lang->get_phrase('root_directory')}</a>
+
+{foreach from=$dirs_array item=dir}
+
+<a onClick="open_dir('{$dir.id}',this);" class="dir">{$dir.name}</a>
+
+{/foreach}
+
+</div>
+</td>
+
+<td id="dir_content" width="100%">
+	<div id="controls">
+	<button id="upload">{$lang->get_phrase('upload')}</button>
+	<div style="float:right"><input type="search" id="search" /></div>
+	
+	</div>
+	<div id="files_list"></div>
+</td>
+</tr>
+</table>
+
+</div>
+
+</div>
+

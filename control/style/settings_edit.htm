@@ -1,0 +1,65 @@
+
+<script>
+$(function() {
+	$("#slider-range-min").slider({
+		range: "min",
+		value: {$settings.control_max},
+		min: 1,
+		max: 150,
+		slide: function( event, ui ) {
+			$("#control_max").val(ui.value);
+			$("#control_max_val").html(ui.value);
+		}
+	});
+	{literal}
+	$("#control_max").val($("#slider-range-min").slider("value"));
+	$("#control_max_val").html($("#slider-range-min").slider("value"));
+	$("#control_max").keyup(function() {
+		$("#slider-range-min").slider({'value':$(this).val() });
+	});
+	{/literal}
+});
+</script>
+
+<div class="page_title">» {$lang->get_phrase('settings')}</div>
+<form action="?show=settings&action=start_edit" method="post" class="validate">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>{$lang->get_phrase('site_title')}</td><td><input type="text" name="site_title" value="{$settings.site_title}" class="required" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('site_url')}</td><td><input type="text" name="site_url" value="{$settings.site_url}" class="required url" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('language')}</td><td>
+<select name="language">
+{section name=tp loop=$languages}
+<option value="{$languages[tp].id}" class="required" {if $languages[tp].id == $settings.language}selected="selected"{/if}>{$languages[tp].lang_name}</option>
+{/section}
+</select>
+</td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('style')}</td><td>
+<select name="style">
+{section name=tp loop=$styles}
+<option value="{$styles[tp].id}" class="required" {if $styles[tp].id == $settings.style}selected="selected"{/if}>{$styles[tp].style_name}</option>
+{/section}
+</select>
+</td>
+</tr>
+<tr><td>{$lang->get_phrase('control_ajax')}</td><td>
+<select name="control_ajax" class="required">
+<option value="on">{$lang->get_phrase('on')}</option>
+<option value="off" {if 'off' == $settings.control_ajax}selected="selected"{/if}>{$lang->get_phrase('off')}</option>
+</select>
+</td></tr>
+<tr><td>{$lang->get_phrase('control_max_results')}</td><td><input type="hidden" name="control_max" id="control_max" value="{$settings.control_max}" class="small_input required number"/>
+<div id="slider-range-min" style="margin-top:8px;width:200px;display:inline-block"></div>
+(<span id="control_max_val"></span>)
+
+</td></tr>
+<tr><td></td><td><input type="submit" value="{$lang->get_phrase('save')}" />
+</td></tr>
+</table>
+</form>

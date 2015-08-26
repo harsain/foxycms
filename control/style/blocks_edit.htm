@@ -1,0 +1,122 @@
+<script>
+$(function() {
+	$("input[name='type']").change(function() {
+		var the_val = $("input[name='type']:checked").val();
+		if(the_val == 1) {
+			$("tr#block_file").hide();
+			$("tr#block_upload").hide();
+			$("tr#block_file select").removeClass("required");
+			$("tr#block_upload input").removeClass("required");
+			$("tr#html_code").fadeIn("fast");
+			$("tr#html_code textarea").addClass("required");
+		} else if (the_val == 2) {
+			$("tr#html_code").hide();
+			$("tr#block_upload").hide();
+			$("tr#html_code textarea").removeClass("required");
+			$("tr#block_upload input").removeClass("required");
+			$("tr#block_file").fadeIn("fast");
+			$("tr#block_file select").addClass("required");
+		} else if(the_val == 3) {
+			$("tr#block_file").hide();
+			$("tr#html_code").hide();
+			$("tr#block_file select").removeClass("required");
+			$("tr#html_code textarea").removeClass("required");
+			$("tr#block_upload").fadeIn("fast");
+			$("tr#block_upload input").addClass("required");
+		}
+	});
+});
+</script>
+<script type="text/javascript" src="../includes/libs/ckeditor/ckeditor.js"></script>
+
+<div class="page_title">» {$lang->get_phrase('blocks')} » {$lang->get_phrase('edit_block')} » {$block.title}</div>
+<form action="?show=blocks&action=start_edit_block" method="post" class="validate" enctype="multipart/form-data">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>{$lang->get_phrase('title')}</td><td><input type="text" name="title" value="{$block.title}" class="require" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('place')}</td><td>
+<!--  position chooser -->
+<script>
+$(function() {
+	$("#position_chooser div").click(function() {
+		$("input#place").attr("value",$(this).attr("rel"));
+		$("#current_place").html($(this).html());
+		$("#position_chooser div").removeClass("current");
+		$(this).addClass("current");
+	});
+	$("div[rel={$block.place}]").addClass("current");
+});
+</script>
+<input type="hidden" name="place" id="place" value="{$block.place}"  class="required" />
+<div id="position_chooser">
+<div rel="1">{$lang->get_phrase('header')}</div>
+<div rel="6">{$lang->get_phrase('content_top')}</div>
+<table width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td width="60"><div rel="4">{$lang->get_phrase('left_menu')}</div></td>
+<td><div rel="5">{$lang->get_phrase('center')}</div></td>
+<td width="60"><div rel="3">{$lang->get_phrase('right_menu')}</div></td>
+</tr>
+</table>
+<div rel="7">{$lang->get_phrase('content_bottom')}</div>
+<div rel="2">{$lang->get_phrase('footer')}</div>
+</div>
+{$lang->get_phrase('current_place')} <span id="current_place">
+{if $block.place == 1}{$lang->get_phrase('header')}{/if}
+{if $block.place == 2}{$lang->get_phrase('footer')}{/if}
+{if $block.place == 3}{$lang->get_phrase('right_menu')}{/if}
+{if $block.place == 4}{$lang->get_phrase('left_menu')}{/if}
+{if $block.place == 5}{$lang->get_phrase('center')}{/if}
+{if $block.place == 6}{$lang->get_phrase('content_top')}{/if}
+{if $block.place == 7}{$lang->get_phrase('content_bottom')}{/if}
+</span>
+<!--  position chooser -end -->
+
+
+</td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('type')}</td><td>
+<input type="radio" name="type" value="1" id="type_1" {if $block.type == 1}checked="checked"{/if} /><label for="type_1">{$lang->get_phrase('html_code')}</label>
+<input type="radio" name="type" value="2" id="type_2" {if $block.type == 2}checked="checked"{/if} /><label for="type_2">{$lang->get_phrase('block_file')}</label>
+<input type="radio" name="type" value="3" id="type_3" /><label for="type_3">{$lang->get_phrase('upload')}</label>
+</td>
+</tr>
+<tr id="html_code" {if $block.type == 2}style="display:none;"{/if}>
+<td>{$lang->get_phrase('html_code')}</td><td><textarea name="html_content">{$block.html_content}</textarea></td>
+</tr>
+<tr id="block_file" {if $block.type == 1}style="display:none;"{/if}>
+<td>{$lang->get_phrase('block_file')}</td><td>
+<select name="php_file">
+	{if $block.php_file == ''}<option value="">{$lang->get_phrase('choose_block')}</option>{/if}
+	{foreach from=$files item=file}
+	<option value="{$file}" {if $block.php_file == $file}selected="selected"{/if}>{$file}</option>
+	{/foreach}
+</select>
+</td>
+</tr>
+<tr id="block_upload" style="display:none;">
+<td>{$lang->get_phrase('upload')}</td><td>
+<input type="file" name="file" />
+</td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('show_title')}</td><td>
+<input type="radio" name="show_title" value="1" id="show_title_1" {if $block.show_title == 1}checked="checked"{/if} /><label for="show_title_1">{$lang->get_phrase('yes')}</label>
+<input type="radio" name="show_title" value="0" id="show_title_0" {if $block.show_title == 0}checked="checked"{/if} /><label for="show_title_0">{$lang->get_phrase('no')}</label>
+</td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('status')}</td><td>
+<input type="radio" name="status" value="1" id="status_1" {if $block.status == 1}checked="checked"{/if} /><label for="status_1">{$lang->get_phrase('enabled')}</label>
+<input type="radio" name="status" value="0" id="status_0" {if $block.status == 0}checked="checked"{/if} /><label for="status_0">{$lang->get_phrase('disabled')}</label>
+</td>
+</tr>
+<tr><td></td><td>
+<input type="submit" value="{$lang->get_phrase('edit')}" />
+<input type="hidden" name="id" value="{$block.id}" />
+</td></tr>
+</table>
+</form>

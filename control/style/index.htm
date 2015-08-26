@@ -1,0 +1,12 @@
+{include file="header.htm"}
+<div id="header">
+	<div class="header_links">
+		<div class="welcome_msg">{$lang->get_phrase('admin_welcome_msg')} <b>{$username}</b></div>
+		<a class="button" href="../" target="_blank">{$settings.site_title}</a>
+		<a class="button" href="login.php?logout">{$lang->get_phrase('logout')}</a>
+	</div>
+</div>
+<div id="content">
+{include file="$tmp_page"}
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,5 @@
+PART1|PART2
+PART1 = [ADMIN] OR [MOD] OR [USER]
+
+if PART1 == [MOD] then
+PART2 = (module:id)(module:id)(module:id)

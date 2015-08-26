@@ -1,0 +1,54 @@
+<div class="page_title">» {$lang->get_phrase('news')} » {$lang->get_phrase('edit_news')} » {$news.title}</div>
+<form action="?show=module_news&action=start_edit_news" method="post" class="validate">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>{$lang->get_phrase('title')}</td><td><input type="text" name="title" value="{$news.title}" class="required" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('sub_title')}</td><td><input type="text" name="sub_title" value="{$news.sub_title}" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('image')}</td><td><input type="photo_library" name="image" value="{$news.image}" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('author')}</td><td><input type="text" name="author_id" value="{$news.author_id}" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('category')}</td><td>
+<select name="cat_id">
+	{section name=tp loop=$cats}
+	<option value="{$cats[tp].id}" {if $news.cat_id == $cats[tp].id}selected="selected"{/if}>{$cats[tp].title}</option>
+	{/section}
+</select>
+</td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('summary')}</td><td><textarea name="summary" class="required">{$news.summary}</textarea></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('text')}</td><td><textarea name="text" class="ckeditor required">{$news.text}</textarea></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('time')}</td><td><input type="text" name="time" value="{$news.time}" class="required" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('source')}</td><td><input type="text" name="source" value="{$news.source}" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('allow_comments')}</td><td>
+<input type="radio" name="comments" value="1" {if $news.comments == 1}checked="checked"{/if} />{$lang->get_phrase('yes')}
+<input type="radio" name="comments" value="0" {if $news.comments == 0}checked="checked"{/if} />{$lang->get_phrase('no')}
+</td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('status')}</td><td>
+<input type="radio" name="status" value="1" {if $news.status == 1}checked="checked"{/if} />{$lang->get_phrase('enabled')}
+<input type="radio" name="status" value="0" {if $news.status == 0}checked="checked"{/if} />{$lang->get_phrase('disabled')}
+</td>
+</tr>
+<tr><td></td><td>
+<input type="submit" value="{$lang->get_phrase('edit')}" />
+<input type="hidden" name="id" value="{$news.id}" />
+</td></tr>
+</table>
+</form>

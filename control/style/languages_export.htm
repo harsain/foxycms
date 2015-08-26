@@ -1,0 +1,13 @@
+<div class="page_title">» {$lang->get_phrase('languages')} » {$lang->get_phrase('export_language')} » {$language.lang_name}</div>
+<form action="?show=languages&action=start_export_language" method="post" class="validate">
+<input type="hidden" name="id" value="{$language.id}" />
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="20%">{$lang->get_phrase('code')}</td><td><input type="text" name="name" class="required" value="{$language.lang_code}" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('name')}</td><td><input type="text" name="name" class="required" value="{$language.lang_name}" /></td>
+</tr>
+<tr><td></td><td><input type="submit" value="{$lang->get_phrase('export')}" /></td></tr>
+</table>
+</form>

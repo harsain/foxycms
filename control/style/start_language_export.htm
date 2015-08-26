@@ -1,0 +1,25 @@
+<script type="text/javascript" src="../includes/libs/codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" type="text/css" href="../includes/libs/codemirror/lib/codemirror.css" />
+<link rel="stylesheet" type="text/css" href="../includes/libs/codemirror/theme/default.css" />
+<script type="text/javascript" src="../includes/libs/codemirror/mode/xml/xml.js"></script>
+
+<div class="page_title">» {$lang->get_phrase('languages')} » {$lang->get_phrase('export_language')} » {$language.lang_name}</div>
+<form action="download.php" method="post" target="_blank">
+<textarea id="source" name="source">{$export}</textarea>
+<br />
+<input type="hidden" name="name" value="{$language.lang_name}" />
+<input type="hidden" name="code" value="{$language.lang_code}" />
+<input type="hidden" name="ext" value="xml" />
+<input type="submit" value="{$lang->get_phrase('download_xml')}" />
+</form>
+<script>
+var editor = CodeMirror.fromTextArea(document.getElementById("source"), {
+  mode: "application/xml",
+  lineNumbers: true,
+  onCursorActivity: function() {
+    editor.setLineClass(hlLine, null);
+    hlLine = editor.setLineClass(editor.getCursor().line, "activeline");
+  }
+});
+var hlLine = editor.setLineClass(0, "activeline");
+</script>

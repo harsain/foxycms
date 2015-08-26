@@ -1,0 +1,33 @@
+<div id="multi_action" style="display:none">
+<div class="dws">{$lang->get_phrase('do_with_selected')}</div>
+<a class="button multi_delete" href="?show=modules&action=delete_modules_multi">{$lang->get_phrase('delete')}</a>
+</div>
+
+<div class="page_title">» {$lang->get_phrase('modules')}</div>
+<div class="page_buttons">
+<a class="button" href="?show=modules&action=create_module">{$lang->get_phrase('create_module')}</a>
+<a class="button" href="?show=modules&action=import_module">{$lang->get_phrase('import_module')}</a>
+</div>
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr class="table_head">
+<td width="5%"></td><td width="50%">{$lang->get_phrase('name')}</td><td>{$lang->get_phrase('options')}</td>
+</tr>
+{section name=tp loop=$modules}
+<tr class="table_item">
+<td><input type="checkbox" id="tobeselected" value="{$modules[tp].id}" /></td><td>{$modules[tp].name}</td>
+<td>
+<a class="button" href="?show=modules&action=show_details&module_id={$modules[tp].id}">{$lang->get_phrase('show_details')}</a>
+<a class="button" href="?show=modules&action=edit_module&id={$modules[tp].id}">{$lang->get_phrase('edit')}</a>
+<a class="button delete" href="?show=modules&action=delete_module&id={$modules[tp].id}">{$lang->get_phrase('delete')}</a>
+<a class="button" href="?show=modules&action=export_module&id={$modules[tp].id}">{$lang->get_phrase('export')}</a>
+<a class="button toggle_val" href="?show=modules&action=toggle_status&id={$modules[tp].id}">
+<span id="enable sub1" {if $modules[tp].status eq 1}style="display:none"{/if}>{$lang->get_phrase('enable')}</span>
+<span id="disable sub2" {if $modules[tp].status eq 0}style="display:none"{/if}>{$lang->get_phrase('disable')}</span>
+</a>
+</td>
+</tr>
+{/section}
+<tr><td colspan="3">
+{include file="style/pages.htm"}
+</td></tr>
+</table>

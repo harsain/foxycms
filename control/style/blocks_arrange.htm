@@ -1,0 +1,61 @@
+{literal}
+<script>
+$(function() {
+    $(".to_sort").sortable({
+		cursor: 'move',
+		placeholder: 'placeholder',
+		connectWith:'.to_sort',
+		forceHelperSize: true,
+		scroll:false,
+		tolerance: 'pointer',
+		opacity:0.8,
+		distance:20,
+		stop: function(event,ui) {
+			var new_place = $(ui.item).parent().attr("rel");
+			$.get("jq_actions.php?action=update_block_place&id="+$(ui.item).attr("rel")+"&new_place="+new_place);
+			window.listt = '';
+			$(".to_sort[rel="+new_place+"] .item").each(function() {
+				window.listt = window.listt+'-'+$(this).attr("rel");
+			});
+			$.get("jq_actions.php?action=blocks_reorder&ids="+window.listt+"&place="+new_place);
+		}
+	}).disableSelection();
+
+});
+</script>
+{/literal}
+
+<div class="page_title">» {$lang->get_phrase('blocks')} » {$lang->get_phrase('arrange_blocks')}</div>
+<div class="page_content">
+
+<div id="blocks_arrange">
+<div rel="1" class="to_sort">
+{section name=tp loop=$blocks_p1}<div class="item" rel="{$blocks_p1[tp].id}">{$blocks_p1[tp].title}</div>{/section}
+</div>
+<div rel="6" class="to_sort">
+{section name=tp loop=$blocks_p6}<div class="item" rel="{$blocks_p6[tp].id}">{$blocks_p6[tp].title}</div>{/section}
+</div>
+<table width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td width="150" valign="top">
+<div rel="4" class="to_sort">
+{section name=tp loop=$blocks_p4}<div class="item" rel="{$blocks_p4[tp].id}">{$blocks_p4[tp].title}</div>{/section}
+</div>
+</td>
+<td valign="top"><div rel="5" class="to_sort">
+{section name=tp loop=$blocks_p5}<div class="item" rel="{$blocks_p5[tp].id}">{$blocks_p5[tp].title}</div>{/section}
+</div></td>
+<td width="150" id="right_blocks" valign="top"><div rel="3" class="to_sort">
+{section name=tp loop=$blocks_p3}<div class="item" rel="{$blocks_p3[tp].id}">{$blocks_p3[tp].title}</div>{/section}
+</div></td>
+</tr>
+</table>
+<div rel="7" class="to_sort">
+{section name=tp loop=$blocks_p7}<div class="item" rel="{$blocks_p7[tp].id}">{$blocks_p7[tp].title}</div>{/section}
+</div>
+<div rel="2" class="to_sort">
+{section name=tp loop=$blocks_p2}<div class="item" rel="{$blocks_p2[tp].id}">{$blocks_p2[tp].title}</div>{/section}
+</div>
+</div>
+
+</div>

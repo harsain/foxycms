@@ -1,0 +1,21 @@
+<div class="page_title">» {$lang->get_phrase('styles')} » {$lang->get_phrase('add_style')}</div>
+<form action="?show=styles&action=start_add_style" method="post" class="validate">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>{$lang->get_phrase('code')}</td><td><input type="text" name="code" class="required" /></td>
+</tr>
+<tr>
+<td width="20%">{$lang->get_phrase('name')}</td><td><input type="text" name="name" class="required" /></td>
+</tr>
+<tr>
+<td>{$lang->get_phrase('status')}</td><td>
+<input type="radio" name="status" value="1" checked="checked" />{$lang->get_phrase('enabled')}
+<input type="radio" name="status" value="0" />{$lang->get_phrase('disabled')}
+</td>
+</tr>
+<tr><td>{$lang->get_phrase('version')}</td><td><input type="text" name="version" value="0.1" class="required" /></td></tr>
+<tr><td>{$lang->get_phrase('designer_name')}</td><td><input type="text" name="designer_name" /></td></tr>
+<tr><td>{$lang->get_phrase('designer_email')}</td><td><input type="text" name="designer_email" /></td></tr>
+<tr><td></td><td><input type="submit" value="{$lang->get_phrase('add')}" /></td></tr>
+</table>
+</form>

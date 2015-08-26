@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="style/jquery.stickynotes.css" type="text/css">
+<script>var new_note_phrase = '{$lang->get_phrase("new_note")}';</script>
+<script type="text/javascript" src="../includes/libs/jquery.stickynotes.js"></script>
+<script>
+{literal}
+$(document).ready(function() {
+	var edited = function(note) {
+		$.get("jq_actions.php?action=notes_edit&text="+escape(note.text)+"&pos_x="+note.pos_x+"&pos_y="+note.pos_y+"&width="+note.width+"&height="+note.height+"&jq_id="+note.id);
+	}
+	var created = function(note) {
+		$.get("jq_actions.php?action=notes_new&pos_x="+note.pos_x+"&pos_y="+note.pos_y+"&width="+note.width+"&height="+note.height+"&jq_id="+note.id);
+	}
+	
+	var deleted = function(note) {
+		$.get("jq_actions.php?action=notes_delete&jq_id="+note.id);
+	}
+	var options = {
+		notes:[
+		    {/literal}
+			{section name=tp loop=$notes}
+			{literal}{{/literal}"id":{$notes[tp].jq_id},
+			"text":"{$notes[tp].text}",
+			"pos_x": {$notes[tp].pos_x},
+			"pos_y": {$notes[tp].pos_y},
+			"width": {$notes[tp].width},
+			"height": {$notes[tp].height}
+			{literal}}{/literal},
+			{/section}
+			{literal}
+			]
+		,resizable: true
+		,controls: true 
+		,editCallback: edited
+		,createCallback: created
+		,deleteCallback: deleted
+		,moveCallback: edited
+		,resizeCallback: edited
+	
+	};
+
+$("#homenotes").stickyNotes(options);
+});
+{/literal}
+</script>
+
+<div class="page_title">» {$lang->get_phrase('mod_notes')}</div>
+
+<div class="page_content">
+<div id="homenotes" style="height:400px;">
+</div>
+</div>
+<br />
+<div class="page_title">» {$lang->get_phrase('foxy')}</div>
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="20%">{$lang->get_phrase('version')}</td><td width="30%">{$foxy_version}</td>
+<td width="20%"></td><td width="30%"></td>
+</tr>
+<tr><td>{$lang->get_phrase('coded_by')}</td><td>foxycms.org</td>
+<td></td><td></td>
+</tr>
+<tr><td>{$lang->get_phrase('server_os')}</td><td>{$server_os}</td>
+<td></td><td></td>
+</tr>
+<tr><td>{$lang->get_phrase('php_version')}</td><td>{$php_version}</td>
+<td></td><td></td>
+</tr>
+<tr><td>{$lang->get_phrase('database')}</td><td style="text-transform:uppercase">{$database}</td>
+<td></td><td></td>
+</tr>
+</table>

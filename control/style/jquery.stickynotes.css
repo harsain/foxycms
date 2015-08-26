@@ -1,0 +1,106 @@
+#sticky-container {
+	position: relative;
+	height:100%;
+}
+
+#sticky-container textarea {
+	outline: 0 none;
+    /*height:100px;*/
+	/*height:100%;*/
+	background:transparent;
+	border:none;
+	overflow:hidden;
+	color:#999;
+	/*padding:0px;*/
+	padding:20px 20px 0px 24px;
+	float:left;
+	resize: none;
+	font: 12px Tahoma;
+}
+
+#sticky-container p {
+	font: 12px Tahoma;
+	overflow:hidden;
+	padding:10px 10px;
+	display:block;
+	color:#444;
+	height:100%;
+}
+
+
+.background {
+    width: 100%; 
+    height: 100%; 
+    position: absolute; 
+    left: 0px; 
+    top: 0px; 
+    z-index: 0;
+}
+
+.stretch {
+    width:100%;
+    height:100%;
+	z-index:0;
+}
+
+/* import */
+.jSticky-large{
+	width:225px;
+	height:228px;
+	position: absolute;
+	z-index:999999;
+}
+.jSticky-medium{
+	width:160px;
+	height:162px;
+	position: absolute;
+	z-index:999999;
+}
+.jSticky-delete[class]{
+	background:transparent url(images/notes/delete.png) no-repeat top left;
+	height:16px;
+	width:16px;
+	position:absolute;
+	cursor:pointer;
+	z-index:4;
+	margin: 5px;
+}
+* .jSticky-delete{
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/notes/delete.png');
+	height:14px;
+	width:14px;
+	position:absolute;
+	cursor:pointer;
+	z-index:4;
+}
+.jSticky-medium .jStickyNote textarea, .jSticky-medium .jStickyNote p{
+	font-size: 12px;
+}
+.jSticky-large .jStickyNote textarea, .jSticky-large .jStickyNote p{
+	height:160px;
+	font-size: 12px;
+}
+
+.jStickyNote {
+	position:absolute;
+	overflow:hidden;
+	cursor:move;
+
+	font-family:'roboto';
+	font-size:12px;
+	background-color:#FDFB8C;
+	border:1px solid #DEDC65;
+	
+    left: 0px; 
+    top: 0px; 
+    z-index: 2;
+	height:100%;
+	overlay:hidden;
+	width:100%;
+	
+	/* Adding a CSS3 shadow below the note, in the browsers which support it: */
+	-moz-box-shadow:2px 2px 0 #DDDDDD;
+	-webkit-box-shadow:2px 2px 0 #DDDDDD;
+	box-shadow:1px 1px 2px #DDDDDD;
+}
+/* import end */
