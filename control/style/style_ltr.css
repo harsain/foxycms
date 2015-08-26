@@ -388,12 +388,12 @@ color: #ff7327;
 }
 label.error {
 	color:#ef5350;
-	padding-left:25px;
+	padding-left:35px;
 	background:url('images/error.png') left no-repeat;
-	background-position:7px;
+	background-position:6px;
 }
 input.error {
-	border:1px solid #E69C9B;
+	border:2px solid #f98d8b;
 }
 /* position chooser */
 #position_chooser {
