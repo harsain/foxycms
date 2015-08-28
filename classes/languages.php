@@ -4,7 +4,7 @@ class Languages {
 
 	public $langs_table = 'languages';
 	public $phrases_table = 'phrases';
-	public $default_lang = 'ar';
+	public $default_lang = 'en';
 	
 	#set the default language id
 	function id() {
@@ -105,7 +105,7 @@ class Languages {
 	}
 	
 	# import xml language file
-	function import($xmlstr,$lang_id,$owner = 'AWCM') {
+	function import($xmlstr,$lang_id,$owner = 'foxy') {
 		global $db;
 		$xml = new SimpleXMLElement($xmlstr);
 		if($lang_id == 'all') {
