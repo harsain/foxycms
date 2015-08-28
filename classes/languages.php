@@ -55,7 +55,7 @@ class Languages {
 	# adding a phrase into a language
 	function add_phrase($var, $text, $lang_id = false, $owner = false) {
 		global $db;
-		if(!$owner) $owner = 'AWCM';
+		if(!$owner) $owner = 'foxy';
 		if(!$lang_id) {
 			$langs = $db->fetch('languages');
 			foreach($langs as $lang) {
