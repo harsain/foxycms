@@ -3,33 +3,34 @@
 class Databases {
 	# connection to the database
 	function connect($db_type,$var1 = false, $var2 = false, $var3 = false, $var4 = false, $var5 = '') {
-		global $db_connected,$pdo,$mysql_connect,$mysql_select_db,$sqlite_open,$db_type1,$db_prefix;
+		global $db_connected,$pdo,$mysql_connect,$mysql_select_db,$db_type1,$db_prefix;
 		$db_type1 = $db_type;		
 		$db_prefix = $var5;
 		switch($db_type) {
 			case 'mysql':
-				#var1 = db_host | var2 = db_user | var3 = db_pass | var4 = db_name | var5 = db_prefix
+				# var1 = db_host | var2 = db_user | var3 = db_pass | var4 = db_name | var5 = db_prefix
 				try {
-					$pdo = new PDO('mysql:host='.$var1.';dbname='.$var4.';charset=utf8', $var2, $var3);
+					$pdo = new PDO("mysql:host=$var1;dbname=$var4;charset=utf8", $var2, $var3);
+					$db_connected = true;
+				} catch (PDOException $e) {
+					die("ERROR: 001");
+				}
+				break;
+			case 'sqlite':
+				# var1 = db_path
+				try {
+					$pdo = new PDO("sqlite:$var1");
 					$db_connected = true;
 				} catch (PDOException $e) {
 					die("ERROR: 001");
 				}
 				break;
 			case 'mysqli':
-				#var1 = db_host | var2 = db_user | var3 = db_pass | var4 = db_name | var5 = db_prefix
+				# var1 = db_host | var2 = db_user | var3 = db_pass | var4 = db_name | var5 = db_prefix
 				$mysql_connect = mysqli_connect($var1,$var2,$var3, $var4) or die("ERROR: 001");
 				if($mysql_connect) {
 					mysqli_select_db($mysql_connect, $var4) or die("ERROR: 002");
 					mysqli_query($mysql_connect, "SET NAMES 'utf8'");
-					$db_connected = true;
-				}
-				break;
-			case 'sqlite':
-				#var1 = db_path
-				$sqlite_open = sqlite_open($var1, 0666, $sqlite_error) or die("ERROR: 003");
-				sqlite_query($sqlite_open,"SET NAMES 'utf8'");
-				if($sqlite_open) {
 					$db_connected = true;
 				}
 				break;
@@ -44,7 +45,7 @@ class Databases {
 	
 	#getting data from database
 	function fetch($table,$where_fields = false ,$where_values = false,$order_by = false, $order_val = false, $page = false, $per_page = false, $limit = false, $final_return = false) {
-		global $db_connected,$db_type1,$pdo,$sqlite_open;
+		global $db_connected,$db_type1,$pdo;
 		$table = $this->add_prefix($table);
 		if((empty($page) OR $page == '') AND !empty($per_page)) $page = 1;
 		if($db_connected) {
@@ -109,6 +110,7 @@ class Databases {
 			if($limit != false) $query .= " LIMIT $limit";
 			switch($db_type1) {
 				case 'mysql':
+				case 'sqlite':
 					try {
 						$stmt = $pdo->query($query);
 						$final_array = array();
@@ -124,14 +126,6 @@ class Databases {
 					$final_array = array();
 					$mysql_query = mysqli_query($mysql_connect, $query) or die("ERROR: 005");
 					while($r = mysqli_fetch_array($mysql_query)) {
-						$final_array[] = $r;
-					}
-					$return = $final_array;
-					break;
-				case 'sqlite':
-					$final_array = array();
-					$sqlite_query = sqlite_query($sqlite_open, $query) or die("ERROR: 007");
-					while($r = sqlite_fetch_array($sqlite_query)) {
 						$final_array[] = $r;
 					}
 					$return = $final_array;
@@ -164,10 +158,11 @@ class Databases {
 	}
 	
 	function query($sql_query) {
-		global $db_connected,$db_type1,$pdo,$sqlite_open;
+		global $db_connected,$db_type1,$pdo;
 		if($db_connected) {
 			switch($db_type1) {
 				case 'mysql':
+				case 'sqlite':
 					try {
 						$query = $pdo->query($sql_query);
 					} catch(PDOException $ex) {
@@ -177,16 +172,12 @@ class Databases {
 				case 'mysqli':
 					$query = mysqli_query($mysql_connect, $sql_query) or die("ERROR: 008");
 					break;
-				case 'sqlite':
-					$query = sqlite_query($sqlite_open,$sql_query) or die("ERROR: 009");
-					break;
-				return $query;
 			}
-		} die("ERROR: 005");
+		} else die("ERROR: 005");
 	}
 	function insert($table,$fields,$values) {
 		$table = $this->add_prefix($table);
-		global $db_type1,$pdo,$sqlite_open;
+		global $db_type1,$pdo;
 		# fields = array | values = array
 		$final_fields = '';
 		if(is_array($fields)) {
@@ -204,6 +195,7 @@ class Databases {
 		} else $final_values = "'$values'";
 		switch($db_type1) {
 			case 'mysql':
+			case 'sqlite':
 				try {
 					$op = $pdo->query("INSERT INTO $table($final_fields) VALUES($final_values)");
 				} catch(PDOException $ex) {
@@ -213,15 +205,12 @@ class Databases {
 			case 'mysqli':
 				$op = mysqli_query($mysql_connect, "INSERT INTO $table($final_fields) VALUES($final_values)");
 				break;
-			case 'sqlite':
-				$op = sqlite_query($sqlite_open,"INSERT INTO $table($final_fields) VALUES($final_values)");
-				break;
 		}
 		if($op) return true; else return false;
 	}
 	
 	function delete($table,$where_fields,$where_values) {
-		global $db_type1,$pdo,$sqlite_open;
+		global $db_type1,$pdo;
 		$table = $this->add_prefix($table);
 		$query = "DELETE FROM $table ";
 		if(is_array($where_fields)) {
@@ -238,6 +227,7 @@ class Databases {
 
 		switch($db_type1) {
 			case 'mysql':
+			case 'sqlite':
 				try {
 					$op = $pdo->query($query);
 				} catch(PDOException $ex) {
@@ -247,15 +237,12 @@ class Databases {
 			case 'mysqli':
 				$op = mysqli_query($mysql_connect, $query);
 				break;
-			case 'sqlite':
-				$op = sqlite_query($sqlite_open,$query);
-				break;
 		}
 		if($op) return true; else return false;
 	}
 	
 	function multi_delete($table,$field,$values) {
-		global $db_type1,$sqlite_open;
+		global $db_type1;
 		$table = $this->add_prefix($table);
 		foreach($values as $value) {
 			$this->delete($table, $field, $value);
@@ -263,7 +250,7 @@ class Databases {
 	}
 	
 	function update($table,$fields,$values,$where_fields = false,$where_values = false) {
-		global $db_type1,$pdo,$sqlite_open;
+		global $db_type1,$pdo;
 		$table = $this->add_prefix($table);
 		$query = "UPDATE $table SET ";
 		
@@ -292,6 +279,7 @@ class Databases {
 		
 		switch($db_type1) {
 			case 'mysql':
+			case 'sqlite':
 				try {
 					$op = $pdo->query($query);
 				} catch(PDOException $ex) {
@@ -301,15 +289,13 @@ class Databases {
 			case 'mysqli':
 				$op = mysqli_query($mysql_connect, $query) or die("ERROR: 010");
 				break;
-			case 'sqlite':
-				$op = sqlite_query($sqlite_open,$query) or die("ERROR: 010");
 		}
 
 		if($op) return true; else return false;
 		
 	}
 	function num_rows($table,$where_fields = '' ,$where_values = false ) {
-		global $db_type1,$pdo,$sqlite_open;
+		global $db_type1,$pdo;
 		$table = $this->add_prefix($table);
 		$query = "SELECT * FROM $table ";
 		if(is_array($where_fields)) {
@@ -359,6 +345,7 @@ class Databases {
 		}
 		switch($db_type1) {
 			case 'mysql':
+			case 'sqlite':
 				try {
 					$stmt = $pdo->query($query);
 				} catch(PDOException $ex) {
@@ -369,17 +356,15 @@ class Databases {
 			case 'mysqli':
 				return mysql_num_rows(mysql_query($query));
 				break;
-			case 'sqlite':
-				return sqlite_num_rows(sqlite_query($sqlite_open,$query));
-				break;
 		}
 	}
 	
 	function add_field($table,$field_name) {
-		global $db,$db_type1,$pdo,$sqlite_open;
+		global $db,$db_type1,$pdo;
 		$query = "ALTER TABLE `$table` ADD `$field_name` TEXT NOT NULL";
 		switch($db_type1) {
 			case 'mysql':
+			case 'sqlite':
 				try {
 					$pdo->query($query);
 					return true;
@@ -389,17 +374,15 @@ class Databases {
 				break;
 			case 'mysqli':
 				if(mysqli_query($mysql_connect, $query)) return true; else return false;
-				break;
-			case 'sqlite':
-				if(sqlite_query($sqlite_open,$query)) return true; else return false;
 				break;
 		}
 	}
 	function delete_field($table,$field_name) {
-		global $db_type1,$pdo,$sqlite_open;
+		global $db_type1,$pdo;
 		$query = "ALTER TABLE `$table` DROP `$field_name`";
 		switch($db_type1) {
 			case 'mysql':
+			case 'sqlite':
 				try {
 					$pdo->query($query);
 					return true;
@@ -409,17 +392,15 @@ class Databases {
 				break;
 			case 'mysqli':
 				if(mysqli_query($mysql_connect, $query)) return true; else return false;
-				break;
-			case 'sqlite':
-				if(sqlite_query($sqlite_open,$query)) return true; else return false;
 				break;
 		}
 	}
 	
 	function query_num_rows($query) {
-		global $db_type1,$pdo,$sqlite_open;
+		global $db_type1,$pdo;
 		switch($db_type1) {
 			case 'mysql':
+			case 'sqlite':
 				try {
 					$stmt = $pdo->query($query);
 				} catch(PDOException $ex) {
@@ -430,10 +411,6 @@ class Databases {
 			case 'mysqli':
 				$query = mysqli_query($mysql_connect, $query);
 				return mysqli_num_rows($query);
-				break;
-			case 'sqlite':
-				$query = sqlite_query($sqlite_open,$query);
-				return sqlite_num_rows($query);
 				break;
 		}
 	}
