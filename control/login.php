@@ -9,8 +9,8 @@ if(isset($_GET['logout'])) {
 }
 
 if(isset($_POST['uname'])) {
-	$username = mysql_real_escape_string($_POST['uname']);
-	$password = mysql_real_escape_string($_POST['passw']);
+	$username = $_POST['uname'];
+	$password = $_POST['passw'];
 	$authenticate = $users->authenticate($username, $password);
 	if($authenticate) {
 		$fetch = $db->fetch('users',array('username','password'),array($username,$users->encrypt($password)));
