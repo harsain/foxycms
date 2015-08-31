@@ -81,7 +81,7 @@ switch ($_GET['action']) {
 		else $module_dev->error_msg('error');
 		break;
 	case 'show_categories':
-		$parent_id = (int) $_POST['parent_id'];
+		$parent_id = (int) isset($_POST['parent_id']) ? $_POST['parent_id'] : 0;;
 		$cats = $db->fetch('news_cats', 'parent_id', 0, 'order');
 		$module_dev->assign('cats', $cats);
 		$module_dev->assign('pcats', cats_tree());
