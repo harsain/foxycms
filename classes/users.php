@@ -164,13 +164,13 @@ class Users {
 		$user = $db->fetch('users','id',$user_id);
 		$user = isset($user[0]) ? $user[0] : '';
 		if ($user !== '') {
-		$usergroup = $db->fetch('users_groups','id',$user['user_group']); $usergroup = $usergroup[0];
-		$usergroup = explode('|',$usergroup['privileges']);
-		if($usergroup[0] == '[ADMIN]') {
-			return true;
-		} elseif($usergroup[0] == '[MOD]') {
-			if(mb_ereg("($priv)", $usergroup[1])) return true; else return false;
-		} else return false;
+			$usergroup = $db->fetch('users_groups','id',$user['user_group']); $usergroup = $usergroup[0];
+			$usergroup = explode('|',$usergroup['privileges']);
+			if($usergroup[0] == '[ADMIN]') {
+				return true;
+			} elseif($usergroup[0] == '[MOD]') {
+				if(mb_ereg("($priv)", $usergroup[1])) return true; else return false;
+			} else return false;
 		} else 
 			return false;
 	}
