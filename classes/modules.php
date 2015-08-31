@@ -133,7 +133,7 @@ Class Modules {
 		$var = str_replace('module_', '', str_replace("/", '', $_GET['show']));
 		$module = $db->fetch('modules', 'var', $var);
 		$dir = $module[0]['directory'];
-		$smarty->assign('tmp_page', "modules/$dir/admin/style/$template");
+		$smarty->assign('tmp_page', str_replace('classes', '', dirname(__FILE__))."modules/$dir/admin/style/$template");
 	}
 	
 	function admin_img($image) {
