@@ -162,7 +162,8 @@ class Users {
 	function check_priv($user_id,$priv) {
 		global $db;
 		$user = $db->fetch('users','id',$user_id);
-		$user = $user[0];
+		$user = isset($user[0]) ? $user[0] : '';
+		if ($user !== '') {
 		$usergroup = $db->fetch('users_groups','id',$user['user_group']); $usergroup = $usergroup[0];
 		$usergroup = explode('|',$usergroup['privileges']);
 		if($usergroup[0] == '[ADMIN]') {
@@ -170,6 +171,8 @@ class Users {
 		} elseif($usergroup[0] == '[MOD]') {
 			if(mb_ereg("($priv)", $usergroup[1])) return true; else return false;
 		} else return false;
+		} else 
+			return false;
 	}
 	
 }
