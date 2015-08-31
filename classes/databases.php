@@ -94,6 +94,7 @@ class Databases {
 					$query .= " WHERE `$where_fields` = '$where_values'";
 				}
 			}
+			$final_order_by = "";
 			if(is_array($order_by)) {
 				$count=0;
 				foreach($order_by as $this_order_by) {

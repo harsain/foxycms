@@ -22,7 +22,7 @@ function cats_tree($id = 0, $parent_id = 0, $pre = '', $list = array()) {
 
 switch ($_GET['action']) {
 	default:
-		$cat_id = (int) $_POST['cat_id'];
+		$cat_id = (int) isset($_POST['cat_id']) ? $_POST['cat_id'] : 0;
 		$module_dev->assign('cats', cats_tree());
 		if (!empty($cat_id)) {
 			$news = $db->fetch('news', 'cat_id', $cat_id, 'time', 'DESC');
