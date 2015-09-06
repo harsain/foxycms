@@ -1,12 +1,11 @@
 <div class="page_title">» {$lang->get_phrase('news')}</div>
 <div class="page_buttons">
 <a class="button" href="?show=module_news&action=add_news">{$lang->get_phrase('add_news')}</a>
-<div class="clear"></div><br />
 <form action="" method="post">
 <select name="cat_id">
 	<option value="">{$lang->get_phrase('select_category')}</option>
 	{section name=tp loop=$cats}
-	<option value="{$cats[tp].id}" {if $smarty.post.cat_id == $cats[tp].id}selected="selected"{/if}>{$cats[tp].title}</option>
+	<option value="{$cats[tp].id}" {if isset($smarty.post.cat_id) && $smarty.post.cat_id == $cats[tp].id}selected="selected"{/if}>{$cats[tp].title}</option>
 	{/section}
 </select>
 <input type="submit" value="{$lang->get_phrase('show')}" />
@@ -16,7 +15,7 @@
 <tr class="table_head">
 <td width="5%"></td><td width="50%">{$lang->get_phrase('title')}</td><td>{$lang->get_phrase('options')}</td>
 </tr>
-{if $news != ''}
+{if isset($news)}
 {section name=tp loop=$news}
 <tr class="table_item">
 <td><input type="checkbox" id="tobeselected" /></td><td>{$news[tp].title}</td>
@@ -26,7 +25,7 @@
 </td>
 </tr>
 {/section}
-{elseif $smarty.post.cat_id == ''}
+{elseif !isset($smarty.post.cat_id)}
 <tr>
 <td colspan="3" align="center">{$lang->get_phrase('select_category')}</td>
 </tr>

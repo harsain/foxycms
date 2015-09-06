@@ -3,18 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2015 at 10:41 AM
+-- Generation Time: Aug 31, 2015 at 08:10 PM
 -- Server version: 5.6.25
 -- PHP Version: 5.6.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `foxy`
@@ -44,10 +38,8 @@ CREATE TABLE IF NOT EXISTS `blocks` (
 
 INSERT INTO `blocks` (`id`, `title`, `type`, `html_content`, `php_file`, `place`, `order`, `show_title`, `status`) VALUES
 (1, 'Date & Time', 2, '', 'date.php', 3, 1, 1, 1),
-(4, 'test in center', 2, 'hello', '1313697494_test.php', 4, 1, 1, 1),
-(5, 'testing...', 2, '', '1313691795_test.php', 2, 4, 1, 1),
-(7, 'test', 1, '<b>hell</b>o', '', 1, 2, 1, 1),
-(8, 'Right', 1, '<p>\r\n	Very nice block</p>\r\n', '', 3, 2, 0, 1);
+(4, 'test in center', 2, 'hello', 'links_menu.php', 4, 2, 1, 1),
+(8, 'Right', 1, '<p>\r\n	Very nice block</p>\r\n', '', 3, 3, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -213,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `phrases` (
   `lang_id` int(11) NOT NULL,
   `text` text COLLATE utf8_unicode_ci NOT NULL,
   `owner` tinytext COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=447 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=448 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `phrases`
@@ -606,7 +598,7 @@ CREATE TABLE IF NOT EXISTS `users_sessions` (
   `last_time` int(11) NOT NULL,
   `hash` tinytext COLLATE utf8_unicode_ci NOT NULL,
   `remember` int(11) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users_sessions`
@@ -623,7 +615,7 @@ INSERT INTO `users_sessions` (`id`, `user_id`, `ip`, `useragent`, `time`, `last_
 (55, 9, '127.0.0.1', 'Mozilla/5.0 (Ubuntu; X11; Linux i686; rv:8.0) Gecko/20100101 Firefox/8.0', 1322857076, 1322857076, 'e8e64e048d26fe1136b2fa48201a5702', 0),
 (56, 9, '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2', 1323534821, 1323534821, 'e8e64e048d26fe1136b2fa48201a5702', 0),
 (57, 9, '127.0.0.1', 'Mozilla/5.0 (Ubuntu; X11; Linux i686; rv:9.0.1) Gecko/20100101 Firefox/9.0.1', 1327154312, 1327154312, 'e8e64e048d26fe1136b2fa48201a5702', 0),
-(61, 10, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1440508224, 1440508224, 'd48d1f4208069433221f23f441608b8b', 0);
+(74, 10, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1441044464, 1441044464, '94dc1129038d591f9d3efc947e1e13ff', 0);
 
 --
 -- Indexes for dumped tables
@@ -768,7 +760,7 @@ ALTER TABLE `news_cats`
 -- AUTO_INCREMENT for table `phrases`
 --
 ALTER TABLE `phrases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=447;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=448;
 --
 -- AUTO_INCREMENT for table `styles`
 --
@@ -808,7 +800,4 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `users_sessions`
 --
 ALTER TABLE `users_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=75;

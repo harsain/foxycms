@@ -1,7 +1,7 @@
 <?php
-//session_start();
+//session_start(); // Not sure why this is commented out? 
 if(isset($_GET['REGISTER'])) {
-	$id = str_replace('a','',$_GET['id']);
+	$id = htmlspecialchars(str_replace('a','',$_GET['id'])); // prevent cross-site-scripting
 	echo $id;
 	if(isset($_SESSION["controlmenu_$id"])) {
 		unset($_SESSION["controlmenu_$id"]);

@@ -2,6 +2,9 @@
 
 require 'global.php';
 
+if (!$users->getlogin())
+	header('Location: login.php');
+
 $show = isset($_GET['show']) ? $_GET['show'] : '';
 if($show == 'settings' OR $show == 'languages' OR $show == 'styles' OR $show == 'modules' OR $show == 'blocks' OR $show == 'users' OR $show == 'media_library') {
 	if($users->check_priv($users->getlogin('id'),'ADMIN')) {

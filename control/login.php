@@ -1,4 +1,5 @@
 <?php
+
 $page = 'login';
 require_once 'global.php';
 
@@ -8,11 +9,13 @@ if(isset($_GET['logout'])) {
 }
 
 if(isset($_POST['uname'])) {
-	$authenticate = $users->authenticate($_POST['uname'],$_POST['passw']);
+	$username = $_POST['uname'];
+	$password = $_POST['passw'];
+	$authenticate = $users->authenticate($username, $password);
 	if($authenticate) {
-		$fetch = $db->fetch('users',array('username','password'),array($_POST['uname'],$users->encrypt($_POST['passw'])));
+		$fetch = $db->fetch('users',array('username','password'),array($username,$users->encrypt($password)));
 		$_SESSION['cp_login'] = $fetch[0]['id'].'-'.$fetch[0]['password'];
-		echo '<script>window.location="index.php";</script>';
+		header('Location: index.php');
 		die();
 	} else {
 		$auth_failed = true;
@@ -21,6 +24,5 @@ if(isset($_POST['uname'])) {
 }
 
 $smarty->display('style/login.htm');
+
 ?>
-
-
